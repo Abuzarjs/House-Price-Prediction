@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>House Price Prediction</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='images/12.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .form input[type="number"], .form input[type="submit"] {
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form">
+        <form action="{{ url_for('predict') }}" method="POST">
+            Bedrooms: <input type="number" name='bedrooms' placeholder="Enter the number of Bedrooms"><br>
+            Bathrooms: <input type="number" name='bathrooms' placeholder="Enter the number of Bathrooms"><br>
+            Floors: <input type="number" name='floors' placeholder="Enter the number of Floors"><br>
+            Year of Build: <input type="number" name='yr_built' placeholder="Enter the year of Build"><br>
+            <input type="submit" value="Predict">
+        </form>
+        {% if error %}
+        <p style="color:red">{{ error }}</p>
+        {% endif %}
+        {% if data %}
+        <p>House Price is: {{ data }}</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>
